@@ -1,0 +1,46 @@
+name: Daily updater
+
+on: [push]
+  #schedule:
+    #- cron:  '20 01 * * *'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: What time is it ?
+      run: |
+        date -u
+        TZ="Europe/Paris" date
+    
+    - name: Set up Python 3
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+    
+    - name: Install prerequisites
+      run: |
+        cd /tmp/
+        #sudo apt -qq update 
+        sudo apt -qq install -y python3 python3-pip python3-dev gcc libssl3 libssl-dev parallel
+        python -m pip install --upgrade pip
+        pip install n3map strip_markdown
+
+    - name: List walkable zones
+      run: |    
+        cd /tmp
+        wget -nv "https://github.com/monoidic/TLDR2/raw/master/walkable_zones.md"
+        python -m strip_markdown "./walkable_zones.md"
+        
+        sed -i -e '/\.$/!d' -e '/^$/d' "./walkable_zones.txt"
+        
+        #cat walkable_zones.txt
+        
+        while IFS= read -r line; do
+          echo "$line"
+        done < "./walkable_zones.txt"
+        
+        #cd $GITHUB_WORKSPACE
