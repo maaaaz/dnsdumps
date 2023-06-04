@@ -48,9 +48,9 @@ jobs:
         cd $GITHUB_WORKSPACE
         while IFS= read -r line; do
           echo "$line"
-          [ $line == '.' ] && line='_rootzone'
+          [[ $line == '.' ]] && line='_rootzone'
           
-          [[ -d $ZONES_DIR/$line ]] || echo 'dir $line no exist'
+          [[ -d $ZONES_DIR/$line ]] || echo "dir $line no exist"
           
         done < "/tmp/walkable_zones.txt"
         
