@@ -53,18 +53,15 @@ jobs:
           echo $CURRENT_ZONE_DIR
           
           cd "$CURRENT_ZONE_DIR"
-          echo n3map --no-prefix-labels -v --output "$zone"zone "$zone"
+          time (timeout -s 9 5s n3map --no-prefix-labels -v --output "$zone"zone "$zone")
           CURRENT_ZONE_ENUM="${CURRENT_ZONE_DIR}${zone}zone"
-          echo $CURRENT_ZONE_ENUM
-          
-
-          
+          echo $CURRENT_ZONE_ENUM          
         done < "/tmp/walkable_zones.txt"
         
-        git config user.name updating-bot
-        git config user.email github-actions@github.com
-        git commit -a -m "updating bot - $(date '+%Y/%m/%d')"
-        git pull
-        git push
+        #git config user.name updating-bot
+        #git config user.email github-actions@github.com
+        #git commit -a -m "updating bot - $(date '+%Y/%m/%d')"
+        #git pull
+        #git push
         
         #cd $GITHUB_WORKSPACE
