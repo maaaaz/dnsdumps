@@ -16,10 +16,8 @@ jobs:
         date -u
         TZ="Europe/Paris" date
     
-    - name: Set up Python 3.10
+    - name: Set up Python 3
       uses: actions/setup-python@v4
-      with:
-        python-version: "3.10"
     
     - name: Install prerequisites
       run: |
@@ -27,3 +25,4 @@ jobs:
         sudo apt install python3 python3-pip python3-dev gcc libssl3 libssl-dev parallel
         pip install n3map
         
+        n3map --help
