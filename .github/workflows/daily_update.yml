@@ -29,13 +29,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install n3map strip_markdown
 
-
-
     - name: Prepare global variables
       run: | 
         echo "ZONES_DIR=$GITHUB_WORKSPACE/zones/" >> $GITHUB_ENV
     
-    - name: List walkable zones
+    - name: List and walk walkable zones
       run: |    
         cd /tmp
         wget -nv "https://github.com/monoidic/TLDR2/raw/master/walkable_zones.md"
@@ -47,10 +45,12 @@ jobs:
         
         cd $GITHUB_WORKSPACE
         while IFS= read -r line; do
-          echo "$line"
-          [[ $line == '.' ]] && line='_rootzone'
+          echo "$zone"
+          [[ $zone == '.' ]] && zone='_rootzone'
           
-          [[ -d $ZONES_DIR/$line ]] || echo "dir $line no exist"
+          [[ -d "$ZONES_DIR/$zone" ]] || mkdir "$ZONES_DIR/$zone"
+          ZONEDIR="$ZONES_DIR/$zone"
+          echo $ZONEDIR
           
         done < "/tmp/walkable_zones.txt"
         
