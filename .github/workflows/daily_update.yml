@@ -57,8 +57,7 @@ jobs:
           CURRENT_ZONE_ENUM="$zone"zone
           echo $CURRENT_ZONE_ENUM
           
-          #sed -e '/^[a-z]/!d' -e '/^$/d' "$CURRENT_ZONE_ENUM" | cut -f1 | sed 's/\.$//' | sort -u
-          exit(1)
+
           
         done < "/tmp/walkable_zones.txt"
         
