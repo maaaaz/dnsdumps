@@ -24,15 +24,17 @@ jobs:
     - name: Install prerequisites
       run: |
         cd /tmp/
-        sudo apt update && sudo apt install -y python3 python3-pip python3-dev gcc libssl3 libssl-dev parallel
+        sudo apt -qq update && sudo apt -qq install -y python3 python3-pip python3-dev gcc libssl3 libssl-dev parallel
         python -m pip install --upgrade pip
         pip install n3map strip_markdown
 
-    - name: Install prerequisites
+    - name: List walkable zones
       run: |    
         cd /tmp
         wget -nv "https://github.com/monoidic/TLDR2/raw/master/walkable_zones.md"
         python -m strip_markdown "./walkable_zones.md"
+        
+        sed -i -e '/\.$/!d' -e '/^$/d' walkable_zones.txt
         
         cat walkable_zones.txt
         
