@@ -25,7 +25,7 @@ jobs:
       run: |
         cd /tmp/
         #sudo apt -qq update 
-        sudo apt -qq install -y python3 python3-pip python3-dev gcc libssl3 libssl-dev parallel
+        sudo apt -qq install -y python3 python3-pip python3-dev gcc libssl3 libssl-dev parallel ldnsutils
         python -m pip install --upgrade pip
         pip install n3map strip_markdown
 
@@ -60,8 +60,9 @@ jobs:
           CURRENT_ZONE_ENUM="${CURRENT_ZONE_DIR}/${zone}zone"
           echo "CURRENT_ZONE_ENUM: $CURRENT_ZONE_ENUM"
           #time (timeout -s 9 5s n3map --quiet --no-prefix-labels --output "$CURRENT_ZONE_ENUM" "$zone")
-          n3map --quiet --no-prefix-labels --output "$zone"zone "$zone"
-          sed -e '/^[a-z]/!d' -e '/^$/d' "$CURRENT_ZONE_ENUM" | cut -f 1 | sed 's/\.$//' | sort -u
+          #n3map --quiet --no-prefix-labels --output "$zone"zone "$zone"
+          ldns-walk "$zone"
+          #sed -e '/^[a-z]/!d' -e '/^$/d' "$CURRENT_ZONE_ENUM" | cut -f 1 | sed 's/\.$//' | sort -u
         
         done < "/tmp/walkable_zones.txt"
         
