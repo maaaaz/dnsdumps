@@ -1,0 +1,28 @@
+name: Daily scans of daily new domain names from OpenSquat feeds
+
+on: [push]
+  #schedule:
+    #- cron:  '20 01 * * *'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: What time is it ?
+      run: |
+        date -u
+        TZ="Europe/Paris" date
+    
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+    
+    - name: Install prerequisites
+      run: |
+        cd /tmp/
+        sudo apt install python3 python3-pip python3-dev gcc libssl3 libssl-dev
+        
