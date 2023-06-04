@@ -24,5 +24,6 @@ jobs:
     - name: Install prerequisites
       run: |
         cd /tmp/
-        sudo apt install python3 python3-pip python3-dev gcc libssl3 libssl-dev
+        sudo apt install python3 python3-pip python3-dev gcc libssl3 libssl-dev parallel
+        pip install n3map
         
