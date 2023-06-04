@@ -31,7 +31,7 @@ jobs:
 
     - name: Prepare global variables
       run: | 
-        echo "ZONES_DIR=$GITHUB_WORKSPACE/zones/" >> $GITHUB_ENV
+        echo "ZONES_DIR=$GITHUB_WORKSPACE/zones" >> $GITHUB_ENV
     
     - name: List and walk walkable zones
       run: |    
@@ -53,5 +53,11 @@ jobs:
           echo $ZONEDIR
           
         done < "/tmp/walkable_zones.txt"
+        
+        git config user.name updating-bot
+        git config user.email github-actions@github.com
+        git commit -a -m "updating bot - $(date '+%Y/%m/%d')"
+        git pull
+        git push
         
         #cd $GITHUB_WORKSPACE
