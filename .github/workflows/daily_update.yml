@@ -43,6 +43,9 @@ jobs:
         
         #cat walkable_zones.txt
         
+        ldns-walk -version
+        exit 1
+        
         cd $GITHUB_WORKSPACE
         while IFS= read -r zone; do
           echo "$zone"
@@ -68,7 +71,7 @@ jobs:
         
         done < "/tmp/walkable_zones.txt"
         
-        wait
+        #wait
         
         #git config user.name updating-bot
         #git config user.email github-actions@github.com
