@@ -58,13 +58,17 @@ jobs:
           
           CURRENT_ZONE_ENUM="${CURRENT_ZONE_DIR}/${zone}zone"
           echo "CURRENT_ZONE_ENUM: $CURRENT_ZONE_ENUM"
-          n3map --help
+          #n3map --help
           #time (timeout -s 9 5s n3map --quiet --no-prefix-labels --output "$CURRENT_ZONE_ENUM" "$zone")
           #n3map --quiet --no-prefix-labels --output "$zone"zone "$zone"
           #timeout -s 9 10s ldns-walk "$zone"
+          ldns-walk "$zone" > CURRENT_ZONE_ENUM &
+          echo
           #sed -e '/^[a-z]/!d' -e '/^$/d' "$CURRENT_ZONE_ENUM" | cut -f 1 | sed 's/\.$//' | sort -u
         
         done < "/tmp/walkable_zones.txt"
+        
+        wait
         
         #git config user.name updating-bot
         #git config user.email github-actions@github.com
