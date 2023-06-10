@@ -30,14 +30,14 @@ jobs:
         python -m pip install -q --upgrade pip
         pip install -q n3map strip_markdown
         
-        wget -nv "https://github.com/NLnetLabs/ldns/archive/refs/tags/1.8.3.zip"
-        unzip -qq "./1.8.3.zip"
-        cd "./ldns-1.8.3"
-        libtoolize -q -ci
-        autoreconf -fi
-        ./configure --prefix=/tmp/ldns --with-examples --with-pyldns
-        make && make install
-        ls -alh /tmp/ldns/bin/ldns-walk
+        #wget -nv "https://github.com/NLnetLabs/ldns/archive/refs/tags/1.8.3.zip"
+        #unzip -qq "./1.8.3.zip"
+        #cd "./ldns-1.8.3"
+        #libtoolize -q -ci
+        #autoreconf -fi
+        #./configure --prefix=/tmp/ldns --with-examples --with-pyldns
+        #make && make install
+        #ls -alh /tmp/ldns/bin/ldns-walk
 
     - name: Prepare global variables
       run: | 
@@ -57,7 +57,7 @@ jobs:
         #/tmp/ldns/bin/ldns-walk -version
         #/tmp/ldns/bin/ldns-walk .
         
-        time n3map --no-prefix-labels --output /tmp/lol9 9.9.9.9 149.112.112.112 1.1.1.1 8.8.8.8 1.0.0.1 208.67.222.222 208.67.220.123 .
+        time n3map --quiet --no-prefix-labels --output /tmp/lol9 9.9.9.9 149.112.112.112 1.1.1.1 8.8.8.8 1.0.0.1 208.67.222.222 208.67.220.123 .
         
         exit 1
         
