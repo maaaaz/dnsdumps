@@ -55,7 +55,10 @@ jobs:
         
         #ldns-walk -version
         #/tmp/ldns/bin/ldns-walk -version
-        /tmp/ldns/bin/ldns-walk .
+        #/tmp/ldns/bin/ldns-walk .
+        
+        time n3map --no-prefix-labels --output /tmp/lol9 9.9.9.9 149.112.112.112 1.1.1.1 8.8.8.8 1.0.0.1 208.67.222.222 208.67.220.123 .
+        
         exit 1
         
         cd $GITHUB_WORKSPACE
@@ -73,11 +76,12 @@ jobs:
           
           CURRENT_ZONE_ENUM="${CURRENT_ZONE_DIR}/${zone}zone"
           echo "CURRENT_ZONE_ENUM: $CURRENT_ZONE_ENUM"
+          
           #n3map --help
           #time (timeout -s 9 5s n3map --quiet --no-prefix-labels --output "$CURRENT_ZONE_ENUM" "$zone")
           #n3map --quiet --no-prefix-labels --output "$zone"zone "$zone"
           #timeout -s 9 10s ldns-walk "$zone"
-          ldns-walk "$zone" > CURRENT_ZONE_ENUM &
+          #ldns-walk "$zone" > CURRENT_ZONE_ENUM &
           echo
           #sed -e '/^[a-z]/!d' -e '/^$/d' "$CURRENT_ZONE_ENUM" | cut -f 1 | sed 's/\.$//' | sort -u
         
