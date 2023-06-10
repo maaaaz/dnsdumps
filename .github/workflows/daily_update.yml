@@ -33,7 +33,7 @@ jobs:
         wget -nv "https://github.com/NLnetLabs/ldns/archive/refs/tags/1.8.3.zip"
         unzip -qq "./1.8.3.zip"
         cd "./ldns-1.8.3"
-        libtoolize -ci
+        libtoolize -q -ci
         autoreconf -fi
         ./configure --prefix=/tmp/ldns --with-examples --with-pyldns
         make && make install
@@ -53,7 +53,8 @@ jobs:
         
         #cat walkable_zones.txt
         
-        ldns-walk -version
+        #ldns-walk -version
+        /tmp/ldns/bin/ldns-walk -version
         exit 1
         
         cd $GITHUB_WORKSPACE
