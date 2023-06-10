@@ -54,8 +54,9 @@ jobs:
         #cat walkable_zones.txt
         
         #ldns-walk -version
-        /tmp/ldns/bin/ldns-walk -version
-        exit 1
+        #/tmp/ldns/bin/ldns-walk -version
+        /tmp/ldns/bin/ldns-walk .
+        #exit 1
         
         cd $GITHUB_WORKSPACE
         while IFS= read -r zone; do
