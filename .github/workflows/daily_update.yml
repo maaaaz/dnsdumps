@@ -32,7 +32,10 @@ jobs:
         
         wget -nv "https://github.com/NLnetLabs/ldns/archive/refs/tags/1.8.3.zip"
         unzip "./1.8.3.zip"
-        cd "./ldns-1.8.3" && ./configure --prefix=/tmp/ldns --with-examples
+        cd "./ldns-1.8.3"
+        libtoolize -ci
+        autoreconf -fi
+        ./configure --prefix=/tmp/ldns --with-examples
 
     - name: Prepare global variables
       run: | 
