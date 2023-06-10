@@ -31,11 +31,13 @@ jobs:
         pip install -q n3map strip_markdown
         
         wget -nv "https://github.com/NLnetLabs/ldns/archive/refs/tags/1.8.3.zip"
-        unzip "./1.8.3.zip"
+        unzip -qq "./1.8.3.zip"
         cd "./ldns-1.8.3"
         libtoolize -ci
         autoreconf -fi
-        ./configure --prefix=/tmp/ldns --with-examples
+        ./configure --prefix=/tmp/ldns --with-examples --with-pyldns
+        make && make install
+        ls -alh /tmp/ldns/bin/ldns-walk
 
     - name: Prepare global variables
       run: | 
@@ -52,7 +54,6 @@ jobs:
         #cat walkable_zones.txt
         
         ldns-walk -version
-        /tmp/ldns/bin/ldns-walk -version
         exit 1
         
         cd $GITHUB_WORKSPACE
