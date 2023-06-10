@@ -25,9 +25,14 @@ jobs:
       run: |
         cd /tmp/
         #sudo apt -qq update 
-        sudo apt -qq install -y python3 python3-pip python3-dev gcc libssl3 libssl-dev parallel ldnsutils
+        #sudo apt -qq install -y python3 python3-pip python3-dev gcc libssl3 libssl-dev parallel ldnsutils
+        
         python -m pip install --upgrade pip
         pip install n3map strip_markdown
+        
+        wget -nv "https://github.com/NLnetLabs/ldns/archive/refs/tags/1.8.3.zip"
+        unzip "./1.8.3.zip"
+        cd "./1.8.3" && ./configure --prefix=/tmp/ldns --with-examples
 
     - name: Prepare global variables
       run: | 
@@ -44,6 +49,7 @@ jobs:
         #cat walkable_zones.txt
         
         ldns-walk -version
+        /tmp/ldns/bin/ldns-walk -version
         exit 1
         
         cd $GITHUB_WORKSPACE
