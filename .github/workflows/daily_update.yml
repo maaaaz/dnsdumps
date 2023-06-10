@@ -57,7 +57,7 @@ jobs:
         #/tmp/ldns/bin/ldns-walk -version
         #/tmp/ldns/bin/ldns-walk .
         
-        time n3map --quiet --no-prefix-labels --output /tmp/lol9 9.9.9.9 149.112.112.112 1.1.1.1 8.8.8.8 1.0.0.1 208.67.222.222 208.67.220.123 .
+        time n3map --quiet --no-prefix-labels --output /tmp/lol9 9.9.9.9 149.112.112.112 1.1.1.1 8.8.8.8 1.0.0.1 208.67.222.222 208.67.220.123 64.6.64.6 8.26.56.26 205.171.3.65 134.195.4.2 76.76.19.19 38.132.106.139 74.82.42.42 76.76.2.0 .
         
         exit 1
         
