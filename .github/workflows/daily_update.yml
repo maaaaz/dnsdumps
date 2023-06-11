@@ -29,15 +29,6 @@ jobs:
         
         python -m pip install -q --upgrade pip
         pip install -q n3map strip_markdown
-        
-        #wget -nv "https://github.com/NLnetLabs/ldns/archive/refs/tags/1.8.3.zip"
-        #unzip -qq "./1.8.3.zip"
-        #cd "./ldns-1.8.3"
-        #libtoolize -q -ci
-        #autoreconf -fi
-        #./configure --prefix=/tmp/ldns --with-examples --with-pyldns
-        #make && make install
-        #ls -alh /tmp/ldns/bin/ldns-walk
 
     - name: Prepare global variables
       run: | 
@@ -45,10 +36,9 @@ jobs:
     
     - name: List and walk walkable zones
       run: |    
-        cd /tmp
+        cd /tmp/
         wget -nv "https://github.com/monoidic/TLDR2/raw/master/walkable_zones.md"
         python -m strip_markdown "./walkable_zones.md"
-        
         sed -i -e '/\.$/!d' -e '/^$/d' "./walkable_zones.txt"
         
         #cat walkable_zones.txt
@@ -57,12 +47,14 @@ jobs:
         #/tmp/ldns/bin/ldns-walk -version
         #/tmp/ldns/bin/ldns-walk .
         
-        time n3map --quiet --no-prefix-labels --output /tmp/lol9 9.9.9.9 149.112.112.112 1.1.1.1 8.8.8.8 1.0.0.1 208.67.222.222 208.67.220.123 64.6.64.6 8.26.56.26 205.171.3.65 76.76.19.19 38.132.106.139 74.82.42.42 76.76.2.0 .
-        cat /tmp/lol9
+        WALK_CMD_BEGIN='n3map --quiet --no-prefix-labels'
         
-        time n3map --quiet --no-prefix-labels --output /tmp/lol10 dz.
-        cat /tmp/lol10
-        exit 1
+        #time n3map --quiet --no-prefix-labels --output /tmp/lol9 9.9.9.9 149.112.112.112 1.1.1.1 8.8.8.8 1.0.0.1 208.67.222.222 208.67.220.123 64.6.64.6 8.26.56.26 205.171.3.65 76.76.19.19 38.132.106.139 74.82.42.42 76.76.2.0 .
+        #cat /tmp/lol9
+        
+        #time n3map --quiet --no-prefix-labels --output /tmp/lol10 dz.
+        #cat /tmp/lol10
+        #exit 1
         
         cd $GITHUB_WORKSPACE
         while IFS= read -r zone; do
@@ -80,12 +72,17 @@ jobs:
           CURRENT_ZONE_ENUM="${CURRENT_ZONE_DIR}/${zone}zone"
           echo "CURRENT_ZONE_ENUM: $CURRENT_ZONE_ENUM"
           
+          [[ $zone == '.' ]] && WALK_CMD_END="--output $CURRENT_ZONE_ENUM 9.9.9.9 149.112.112.112 1.1.1.1 8.8.8.8 1.0.0.1 208.67.222.222 208.67.220.123 64.6.64.6 8.26.56.26 205.171.3.65 76.76.19.19 38.132.106.139 74.82.42.42 76.76.2.0 ."
+          WALK_CMD="$WALK_CMD_BEGIN $WALK_CMD_END"
+          echo "$WALK_CMD"
+          exit 1
+          
           #n3map --help
           #time (timeout -s 9 5s n3map --quiet --no-prefix-labels --output "$CURRENT_ZONE_ENUM" "$zone")
           #n3map --quiet --no-prefix-labels --output "$zone"zone "$zone"
           #timeout -s 9 10s ldns-walk "$zone"
           #ldns-walk "$zone" > CURRENT_ZONE_ENUM &
-          echo
+          #echo
           #sed -e '/^[a-z]/!d' -e '/^$/d' "$CURRENT_ZONE_ENUM" | cut -f 1 | sed 's/\.$//' | sort -u
         
         done < "/tmp/walkable_zones.txt"
