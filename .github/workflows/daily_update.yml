@@ -79,7 +79,7 @@ jobs:
           
           WALK_CMD="$WALK_CMD_BEGIN $WALK_CMD_END"
           echo "$WALK_CMD"
-          $WALK_CMD
+          #$WALK_CMD
           #exit 1
           
           #n3map --help
@@ -88,8 +88,8 @@ jobs:
           #timeout -s 9 10s ldns-walk "$zone"
           #ldns-walk "$zone" > CURRENT_ZONE_ENUM &
           
-          echo "end of enum for $zone"
-          sed -e '/^[a-z]/!d' -e '/^$/d' "$CURRENT_ZONE_ENUM" | cut -f 1 | sed 's/\.$//' | sort -u
+          #echo "end of enum for $zone"
+          #sed -e '/^[a-z]/!d' -e '/^$/d' "$CURRENT_ZONE_ENUM" | cut -f 1 | sed 's/\.$//' | sort -u
           echo
         
         done < "/tmp/walkable_zones.txt"
