@@ -35,6 +35,17 @@ jobs:
       run: | 
         echo "ZONES_DIR=$GITHUB_WORKSPACE/zones" >> $GITHUB_ENV
     
+    - name: Test SSH remote
+      env:
+        SSH_REMOTE_SERVER_KEY: ${{ secrets.SSH_REMOTE_SERVER_KEY }}
+      run: |    
+        cd /tmp/
+        echo "$SSH_REMOTE_SERVER_KEY" > /tmp/sshkey
+        chmod 600 /tmp/sshkey
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/sskey" --progress dailynrdscan@ssh-dailynrdscan.alwaysdata.net:/home/dailynrdscan/www/zones .
+        ls -alh ./zones
+        exit 1
+        
     - name: List and walk walkable zones
       run: |    
         cd /tmp/
