@@ -78,6 +78,7 @@ jobs:
           
           WALK_CMD="$WALK_CMD_BEGIN $WALK_CMD_END"
           echo "$WALK_CMD"
+          $WALK_CMD &
           #exit 1
           
           #n3map --help
@@ -90,7 +91,7 @@ jobs:
         
         done < "/tmp/walkable_zones.txt"
         
-        #wait
+        wait
         
         #git config user.name updating-bot
         #git config user.email github-actions@github.com
