@@ -79,7 +79,7 @@ jobs:
           
           WALK_CMD="$WALK_CMD_BEGIN $WALK_CMD_END"
           echo "$WALK_CMD"
-          $WALK_CMD &
+          $WALK_CMD 2>/dev/null &
           #exit 1
           
           #n3map --help
