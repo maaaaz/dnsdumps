@@ -79,7 +79,7 @@ jobs:
           
           WALK_CMD="$WALK_CMD_BEGIN $WALK_CMD_END"
           echo "$WALK_CMD"
-          $WALK_CMD 2>/dev/null &
+          $WALK_CMD 2>/dev/null
           #exit 1
           
           #n3map --help
@@ -88,14 +88,14 @@ jobs:
           #timeout -s 9 10s ldns-walk "$zone"
           #ldns-walk "$zone" > CURRENT_ZONE_ENUM &
           echo
-          #sed -e '/^[a-z]/!d' -e '/^$/d' "$CURRENT_ZONE_ENUM" | cut -f 1 | sed 's/\.$//' | sort -u
+          sed -e '/^[a-z]/!d' -e '/^$/d' "$CURRENT_ZONE_ENUM" | cut -f 1 | sed 's/\.$//' | sort -u
         
         done < "/tmp/walkable_zones.txt"
         
-        wait
+        #wait
         
-        ls -alR $ZONES_DIR
-        fdfind . "$ZONES_DIR" -e '.zone' -x bash -c "echo {} && cat {} && echo -e ---------------------------------------------------------- '\n'"
+        #ls -alR $ZONES_DIR
+        #fdfind . "$ZONES_DIR" -e '.zone' -x bash -c "echo {} && cat {} && echo -e ---------------------------------------------------------- '\n'"
         
         
         #git config user.name updating-bot
