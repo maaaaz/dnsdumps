@@ -26,6 +26,7 @@ jobs:
         cd /tmp/
         #sudo apt -qq update 
         #sudo apt -qq install -y python3 python3-pip python3-dev gcc libssl3 libssl-dev parallel ldnsutils
+        sudo apt install fd-find
         
         python -m pip install -q --upgrade pip
         pip install -q n3map strip_markdown
@@ -93,7 +94,8 @@ jobs:
         
         wait
         
-        ls -alR $GITHUB_WORKSPACE
+        ls -alR $ZONES_DIR
+        fdfind . "$ZONES_DIR" -e '.zone' -x bash -c "echo {} && cat {} && echo -e ---------------------------------------------------------- '\n'"
         
         
         #git config user.name updating-bot
