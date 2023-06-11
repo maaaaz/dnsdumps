@@ -93,6 +93,9 @@ jobs:
         
         wait
         
+        ls -alR $GITHUB_WORKSPACE
+        
+        
         #git config user.name updating-bot
         #git config user.email github-actions@github.com
         #git commit -a -m "updating bot - $(date '+%Y/%m/%d')"
