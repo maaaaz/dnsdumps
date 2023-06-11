@@ -42,7 +42,7 @@ jobs:
         cd /tmp/
         echo "$SSH_REMOTE_SERVER_KEY" > /tmp/sshkey
         chmod 600 /tmp/sshkey
-        rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/sshkey" --progress dailynrdscan@ssh-dailynrdscan.alwaysdata.net:/home/dailynrdscan/www/zones .
+        rsync -avz -e "ssh -o LogLevel=quiet -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/sshkey" --progress dailynrdscan@ssh-dailynrdscan.alwaysdata.net:/home/dailynrdscan/www/zones .
         ls -alh ./zones
         exit 1
         
