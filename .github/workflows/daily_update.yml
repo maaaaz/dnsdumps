@@ -73,6 +73,9 @@ jobs:
           echo "CURRENT_ZONE_ENUM: $CURRENT_ZONE_ENUM"
           
           [[ $zone == '.' ]] && WALK_CMD_END="--output $CURRENT_ZONE_ENUM 9.9.9.9 149.112.112.112 1.1.1.1 8.8.8.8 1.0.0.1 208.67.222.222 208.67.220.123 64.6.64.6 8.26.56.26 205.171.3.65 76.76.19.19 38.132.106.139 74.82.42.42 76.76.2.0 ."
+          
+          WALK_CMD_END="--output $CURRENT_ZONE_ENUM "$zone""
+          
           WALK_CMD="$WALK_CMD_BEGIN $WALK_CMD_END"
           echo "$WALK_CMD"
           exit 1
