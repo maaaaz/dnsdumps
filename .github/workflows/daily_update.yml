@@ -36,12 +36,18 @@ jobs:
         cd /tmp/
         echo "$SSH_REMOTE_SERVER_KEY" > /tmp/sshkey
         chmod 600 /tmp/sshkey
+        
+        # rsynced data is in /tmp/zones
         rsync -avz -e "ssh -o LogLevel=quiet -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/sshkey" --progress dailynrdscan@ssh-dailynrdscan.alwaysdata.net:/home/dailynrdscan/www/zones .
-        ls -alhR ./zones
-        exit 1
+        #ls -alhR ./zones
         
     - name: List and walk walkable zones
       run: | 
+        
+        cd /tmp/zones/
+      
+        exit 1
+      
         #git config user.name updating-bot
         #git config user.email github-actions@github.com
         #git commit -a -m "updating bot - $(date '+%Y/%m/%d')"
