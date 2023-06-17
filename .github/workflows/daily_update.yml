@@ -29,7 +29,7 @@ jobs:
       run: | 
         echo "ZONES_DIR=$GITHUB_WORKSPACE/zones" >> $GITHUB_ENV
     
-    - name: Test SSH remote
+    - name: Rsync data
       env:
         SSH_REMOTE_SERVER_KEY: ${{ secrets.SSH_REMOTE_SERVER_KEY }}
       run: |    
@@ -38,13 +38,16 @@ jobs:
         chmod 600 /tmp/sshkey
         
         # rsynced data is in /tmp/zones
-        rsync -avz -e "ssh -o LogLevel=quiet -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/sshkey" --progress dailynrdscan@ssh-dailynrdscan.alwaysdata.net:/home/dailynrdscan/www/zones .
+        rsync -az -e "ssh -o LogLevel=quiet -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/sshkey" --progress dailynrdscan@ssh-dailynrdscan.alwaysdata.net:/home/dailynrdscan/www/zones .
         #ls -alhR ./zones
         
     - name: List and walk walkable zones
       run: | 
         
-        cd /tmp/zones/
+        cd /tmp/
+        python -Wall "$GITHUB_WORKSPACE/_scripts/daily_merge.py" -f "/tmp/zones" -r "$ZONES_DIR" -d "/tmp/diff_results"
+        ls -alh diff_results && wc diff_results 
+        cat diff_results
       
         exit 1
       
