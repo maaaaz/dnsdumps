@@ -26,7 +26,7 @@ jobs:
     
     - name: Install prerequisites
       run: |
-        sudo apt -qq install fdfind
+        sudo apt -qq install fd-find
 
     - name: Prepare global variables
       run: | 
