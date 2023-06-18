@@ -61,6 +61,8 @@ jobs:
         cd /tmp/
         which fdfind
         which zcat
+        fdfind $TMP
+        fdfind "$TMP"
         #fdfind --help
         #fdfind -a -g 'today_new.gz' "$ZONES_DIR"
         #fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x ls -alh
