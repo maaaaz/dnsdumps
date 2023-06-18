@@ -48,7 +48,7 @@ jobs:
         python -Wall "$GITHUB_WORKSPACE/_scripts/daily_merge.py" -f "/tmp/zones" -r "$ZONES_DIR" -d "/tmp/diff_results"
         ls -alh diff_results && wc diff_results 
         cat diff_results
-      
+        
         exit 1
       
         #git config user.name updating-bot
