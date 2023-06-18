@@ -25,7 +25,6 @@ parser = argparse.ArgumentParser(description="version: " + VERSION)
 input_group = parser.add_argument_group('Input parameters')
 input_group.add_argument('-f', '--fresh-dir', help='Input directory of the fresh data to merge', default = None, required = True)
 input_group.add_argument('-r', '--referential-dir', help='Referential directory', default = None, required = True)
-input_group.add_argument('-d', '--diff-file', help='Differential file', default = None, required = True)
 
 def print_horizontal_bar(width='large'):
     if width == 'large':
@@ -61,7 +60,6 @@ def merge(options):
     
     fresh = options.fresh_dir
     referential = options.referential_dir
-    diff_file = os.path.abspath(options.diff_file)
     
     for fresh_dir in sorted(os.listdir(fresh)):
         print("[+] directory:\t%s" % fresh_dir)
