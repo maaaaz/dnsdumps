@@ -58,7 +58,7 @@ def merge(options):
                 #shutil.copyfile(fresh_file_full_path, ref_file_full_path)
                 
             else:
-                cmd = 'bash -c "comm -13 <(zcat \'%s\') <(zcat \'%s\') >> \'%s\'"' % (fresh_file_full_path, ref_file_full_path, options.diff_file)
+                cmd = 'bash -c "comm -13 <(zcat \'%s\') <(zcat \'%s\') >> \'%s\'"' % (ref_file_full_path, fresh_file_full_path, options.diff_file)
                 exec_cmd(cmd)
     
     
