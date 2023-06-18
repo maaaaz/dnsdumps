@@ -58,8 +58,10 @@ jobs:
     - name: Generate today_new and yesterday_new files 
       run: |
         cd "$DAILY_DIR"
+        which fdfind
+        which fd
         #fdfind -a -g 'today_new.gz' "$ZONES_DIR"
-        fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x zcat {}
+        fd -a -g 'today_new.gz' "$ZONES_DIR" -x zcat {}
         (fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x zcat {}) | tee | gzip > "./today_new.gz"
         
         #fdfind -a -g 'yesterday_new.gz' "$ZONES_DIR"
