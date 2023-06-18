@@ -29,8 +29,13 @@ input_group.add_argument('-d', '--diff-file', help='Differential file', default 
 
 def exec_cmd(cmd):
     # yes, I know, <shell=True>
-    p = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    print(p)
+    p = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding='utf-8')
+    pprint.pprint(p.args)
+    pprint.pprint("RETCODE: "+ p.returncode)
+    pprint.pprint("STDOUT:\n" + p.stdout.splitlines())
+    pprint.pprint("STDERR:\n" + p.stderr.splitlines())
+    
+    
 
 def merge(options):
     print("[+] fresh dir:\t\t'%s'" % options.fresh_dir)
@@ -58,7 +63,7 @@ def merge(options):
                 #shutil.copyfile(fresh_file_full_path, ref_file_full_path)
                 
             else:
-                cmd = 'bash -c "comm -13 <(zcat \'%s\' | sort -u) <(zcat \'%s\' | sort -u) >> \'%s\'"' % (ref_file_full_path, fresh_file_full_path, options.diff_file)
+                cmd = 'bash -c "comm -13 <(zcat \'%s\' | sort -u) <(zcat \'%s\' | sort -u) >> \'%s\'"' % (ref_file_full_path, fresh_file_full_path, os.path.abspath(options.diff_file))
                 exec_cmd(cmd)
     
     
