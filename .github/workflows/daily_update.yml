@@ -70,6 +70,9 @@ jobs:
         
         ls -alh "./today_new.gz"
         ls -alh "./yesterday_new.gz"
+        
+        readlink -f "./today_new.gz"
+        readlink -f "./yesterday_new.gz"
           
     - name: Git commit 
       run: |
@@ -80,7 +83,7 @@ jobs:
         git add ./*
         
         cd "$DAILY_DIR"
-        git add ./*
+        git add "./today_new.gz" "./yesterday_new.gz" 
         
         git commit -a -m "updating bot - $(date '+%Y/%m/%d')"
         git pull
