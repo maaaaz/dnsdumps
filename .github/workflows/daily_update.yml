@@ -26,7 +26,7 @@ jobs:
     
     - name: Install prerequisites
       run: |
-        sudo apt -qq install fd-find
+        #sudo apt -qq install fd-find
 
     - name: Prepare global variables
       run: | 
@@ -57,27 +57,23 @@ jobs:
       
     - name: Generate today_new and yesterday_new files 
       run: |
-        #cd "$DAILY_DIR"
-        cd /tmp/
-        which fdfind
-        which zcat
-        fdfind $TMP
-        fdfind "$TMP"
-        #fdfind --help
-        #fdfind -a -g 'today_new.gz' "$ZONES_DIR"
+        cd "$DAILY_DIR"
+        #cd /tmp/
+        zcat ./**/today_new.gz
+        
         #fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x ls -alh
-        (fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x /usr/bin/zcat) 2>&1
-        (fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x zcat {}) | tee | gzip > "./today_new.gz"
+        #(fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x /usr/bin/zcat) 2>&1
+        #(fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x zcat {}) | tee | gzip > "./today_new.gz"
         
         #fdfind -a -g 'yesterday_new.gz' "$ZONES_DIR"
-        (fdfind -a -g 'yesterday_new.gz' "$ZONES_DIR" -x zcat {}) | tee
-        (fdfind -a -g 'yesterday_new.gz' "$ZONES_DIR" -x zcat {}) | tee | gzip > "./yesterday_new.gz"
+        #(fdfind -a -g 'yesterday_new.gz' "$ZONES_DIR" -x zcat {}) | tee
+        #(fdfind -a -g 'yesterday_new.gz' "$ZONES_DIR" -x zcat {}) | tee | gzip > "./yesterday_new.gz"
         
-        ls -alh "./today_new.gz"
-        ls -alh "./yesterday_new.gz"
+        #ls -alh "./today_new.gz"
+        #ls -alh "./yesterday_new.gz"
         
-        readlink -f "./today_new.gz"
-        readlink -f "./yesterday_new.gz"
+        #readlink -f "./today_new.gz"
+        #readlink -f "./yesterday_new.gz"
           
     - name: Git commit 
       run: |
