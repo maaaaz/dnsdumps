@@ -1,8 +1,8 @@
 name: Daily updater
 
-on: [push]
-  #schedule:
-    #- cron:  '20 03 * * *'
+on:
+  schedule:
+    - cron:  '20 00 * * *'
 
 permissions:
   contents: write
