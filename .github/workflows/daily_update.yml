@@ -45,9 +45,10 @@ jobs:
       run: | 
         
         cd /tmp/
-        python -Wall "$GITHUB_WORKSPACE/_scripts/daily_merge.py" -f "/tmp/zones" -r "$ZONES_DIR" -d "/tmp/diff_results"
-        ls -alh diff_results && wc diff_results 
-        cat diff_results
+        python -Wall "$GITHUB_WORKSPACE/_scripts/daily_merge.py" -f "/tmp/zones" -r "$ZONES_DIR"
+        
+        cd "$ZONES_DIR"
+        ls -alR
         
         exit 1
       
