@@ -31,7 +31,7 @@ def exec_cmd(cmd):
     # yes, I know, <shell=True>
     p = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding='utf-8')
     pprint.pprint(p.args)
-    pprint.pprint("RETCODE: "+ p.returncode)
+    pprint.pprint("RETCODE: %s"+ p.returncode)
     pprint.pprint("STDOUT:\n" + p.stdout.splitlines())
     pprint.pprint("STDERR:\n" + p.stderr.splitlines())
     
