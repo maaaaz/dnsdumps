@@ -4,6 +4,9 @@ on: [push]
   #schedule:
     #- cron:  '20 03 * * *'
 
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
