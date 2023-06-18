@@ -57,7 +57,7 @@ jobs:
       
     - name: Generate today_new and yesterday_new files 
       run: |
-        cd "$DAILY_DIR"
+        cd "$ZONES_DIR"
         #cd /tmp/
         zcat ./**/today_new.gz
         
