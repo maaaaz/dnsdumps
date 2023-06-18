@@ -26,11 +26,12 @@ jobs:
     
     - name: Install prerequisites
       run: |
-        cd /tmp/
+        apt -qq install fdfind
 
     - name: Prepare global variables
       run: | 
         echo "ZONES_DIR=$GITHUB_WORKSPACE/zones" >> $GITHUB_ENV
+        echo "DAILY_DIR=$GITHUB_WORKSPACE/daily" >> $GITHUB_ENV
     
     - name: Rsync data
       env:
@@ -54,12 +55,23 @@ jobs:
         ls -alR
         zcat ./audio/today_new.gz
       
+    - name: Generate today_new and yesterday_new files 
+      run: |
+        cd "$DAILY_DIR"
+        (fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x zcat {}) | tee | gzip > today_new.gz
+        (fdfind -a -g 'yesterday_new.gz' "$ZONES_DIR" -x zcat {}) | tee | gzip > yesterday_new.gz
+          
     - name: Git commit 
       run: |
-        cd "$ZONES_DIR"
         git config user.name updating-bot
         git config user.email github-actions@github.com
+        
+        cd "$ZONES_DIR"
         git add ./*
+        
+        cd "$DAILY_DIR"
+        git add ./*
+        
         git commit -a -m "updating bot - $(date '+%Y/%m/%d')"
         git pull
         git push
