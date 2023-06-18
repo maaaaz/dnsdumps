@@ -42,24 +42,18 @@ jobs:
         chmod 600 /tmp/sshkey
         
         # rsynced data is in /tmp/zones
-        rsync -az -e "ssh -o LogLevel=quiet -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/sshkey" --progress dailynrdscan@ssh-dailynrdscan.alwaysdata.net:/home/dailynrdscan/www/zones .
-        #ls -alhR ./zones
+        rsync --stats -az -e "ssh -o LogLevel=quiet -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/sshkey" dailynrdscan@ssh-dailynrdscan.alwaysdata.net:/home/dailynrdscan/www/zones .
         
     - name: List and walk walkable zones
       run: | 
-        
         cd /tmp/
         python -Wall "$GITHUB_WORKSPACE/_scripts/daily_merge.py" -f "/tmp/zones" -r "$ZONES_DIR"
-        
-        cd "$ZONES_DIR"
-        ls -alR
-        zcat ./audio/today_new.gz
       
     - name: Generate today_new and yesterday_new files 
       run: |
         cd "$DAILY_DIR"
-        fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x zcat {}) | tee | gzip > "./today_new.gz"
-        fdfind -a -g 'yesterday_new.gz' "$ZONES_DIR" -x zcat {}) | tee | gzip > "./yesterday_new.gz"
+        (fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x zcat) | tee | gzip > "./today_new.gz"
+        (fdfind -a -g 'yesterday_new.gz' "$ZONES_DIR" -x zcat) | tee | gzip > "./yesterday_new.gz"
           
     - name: Git commit 
       run: |
