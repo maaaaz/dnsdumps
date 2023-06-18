@@ -57,7 +57,8 @@ jobs:
       
     - name: Generate today_new and yesterday_new files 
       run: |
-        cd "$DAILY_DIR"
+        #cd "$DAILY_DIR"
+        cd /tmp/
         which fdfind
         which zcat
         #fdfind --help
