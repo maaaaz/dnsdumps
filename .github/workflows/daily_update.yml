@@ -66,7 +66,7 @@ jobs:
         #fdfind --help
         #fdfind -a -g 'today_new.gz' "$ZONES_DIR"
         #fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x ls -alh
-        fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x /usr/bin/zcat
+        (fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x /usr/bin/zcat) 2>&1
         (fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x zcat {}) | tee | gzip > "./today_new.gz"
         
         #fdfind -a -g 'yesterday_new.gz' "$ZONES_DIR"
