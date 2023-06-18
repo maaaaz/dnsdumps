@@ -49,15 +49,14 @@ jobs:
         
         cd "$ZONES_DIR"
         ls -alR
-        
         zcat ./audio/today_new.gz
-        
-        exit 1
       
-        #git config user.name updating-bot
-        #git config user.email github-actions@github.com
-        #git commit -a -m "updating bot - $(date '+%Y/%m/%d')"
-        #git pull
-        #git push
-        
-        #cd $GITHUB_WORKSPACE
+    - name: Git commit 
+      run: |
+        cd "$ZONES_DIR"
+        git config user.name updating-bot
+        git config user.email github-actions@github.com
+        git add ./*
+        git commit -a -m "updating bot - $(date '+%Y/%m/%d')"
+        git pull
+        git push
