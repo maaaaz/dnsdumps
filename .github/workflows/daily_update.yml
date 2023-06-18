@@ -50,6 +50,8 @@ jobs:
         cd "$ZONES_DIR"
         ls -alR
         
+        zcat ./audio/today_new.gz
+        
         exit 1
       
         #git config user.name updating-bot
