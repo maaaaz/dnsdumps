@@ -26,7 +26,7 @@ jobs:
     
     - name: Install prerequisites
       run: |
-        sudo apt -qq install fd-find zutils
+        sudo apt -qq install fd-find
 
     - name: Prepare global variables
       run: | 
@@ -59,9 +59,10 @@ jobs:
       run: |
         cd "$DAILY_DIR"
         which fdfind
+        which zcat
         fdfind --help
         #fdfind -a -g 'today_new.gz' "$ZONES_DIR"
-        fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x ls
+        fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x ls -alh
         fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x zcat
         (fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x zcat {}) | tee | gzip > "./today_new.gz"
         
