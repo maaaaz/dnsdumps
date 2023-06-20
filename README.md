@@ -3,7 +3,11 @@ dnsdumps
 
 Description
 -----------
-Various DNS dumps (daily new domains, etc.)
+Various DNS dumps: 
+* In the [`zones`](https://github.com/maaaaz/dnsdumps/tree/main/zones) folder, you can find, for each grabbed zone, the current full DNS zone ({today,yesterday}.gz) and differential datasets ({today,yesterday}_new.gz) for newly created domain names
+* In the [`daily`](https://github.com/maaaaz/dnsdumps/tree/main/daily) folder, you can find the consolidated newly created domain names ({today,yesterday}_new.gz)
+
+UTC is the timezone reference.
 
 
 Credits
