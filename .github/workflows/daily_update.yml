@@ -44,7 +44,7 @@ jobs:
         # rsynced data is in /tmp/zones
         rsync --stats -az -e "ssh -o LogLevel=quiet -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /tmp/sshkey" dailynrdscan@ssh-dailynrdscan.alwaysdata.net:/home/dailynrdscan/www/zones .
         
-    - name: List and walk walkable zones
+    - name: Merge collected zones
       run: | 
         cd /tmp/
         python -Wall "$GITHUB_WORKSPACE/_scripts/daily_merge.py" -f "/tmp/zones" -r "$ZONES_DIR"
