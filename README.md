@@ -9,6 +9,7 @@ Various DNS dumps:
 
 UTC is the timezone reference.
 
+Take a look at the [Q&A](https://github.com/maaaaz/dnsdumps/wiki/Home-%E2%80%90-Q&A)
 
 Credits
 -------
