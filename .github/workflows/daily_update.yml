@@ -69,3 +69,10 @@ jobs:
         git commit -a -m "updating bot - $(date '+%Y/%m/%d')"
         git pull
         git push
+
+    - name: How many new FQDNs today ?
+      run: |
+        cp "$DAILY_DIR/today_new.gz" /tmp/
+        gunzip "/tmp/today_new.gz"
+        wc "/tmp/today_new"
+        rev "/tmp/today_new" | cut -d '.' -f 1 | rev | sort | uniq -c
