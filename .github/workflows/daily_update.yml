@@ -1,8 +1,9 @@
 name: Daily updater
 
-on:
-  schedule:
-    - cron:  '20 00 * * *'
+on: 
+  workflow_dispatch
+  #schedule:
+  #  - cron:  '20 00 * * *'
 
 permissions:
   contents: write
