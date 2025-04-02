@@ -32,7 +32,11 @@ jobs:
       run: | 
         echo "ZONES_DIR=$GITHUB_WORKSPACE/zones" >> $GITHUB_ENV
         echo "DAILY_DIR=$GITHUB_WORKSPACE/daily" >> $GITHUB_ENV
-    
+
+    - name: Git pull
+      run: | 
+        git pull
+        
     - name: Rsync data
       env:
         SSH_REMOTE_SERVER_KEY: ${{ secrets.SSH_REMOTE_SERVER_KEY }}
@@ -57,7 +61,6 @@ jobs:
           
     - name: Git commit 
       run: |
-        git pull --rebase
         
         git config user.name updating-bot
         git config user.email github-actions@github.com
