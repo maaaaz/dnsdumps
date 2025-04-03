@@ -57,8 +57,8 @@ jobs:
     - name: Generate today_new and yesterday_new files 
       run: |
         cd "$DAILY_DIR"
-        (fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x zcat) | tee | gzip > "./today_new.gz"
-        (fdfind -a -g 'yesterday_new.gz' "$ZONES_DIR" -x zcat) | tee | gzip > "./yesterday_new.gz"
+        (fdfind -a -g 'today_new.gz' "$ZONES_DIR" -x zcat) | tee | gzip -9 > "./today_new.gz"
+        (fdfind -a -g 'yesterday_new.gz' "$ZONES_DIR" -x zcat) | tee | gzip -9 > "./yesterday_new.gz"
           
     - name: Git commit 
       run: |
