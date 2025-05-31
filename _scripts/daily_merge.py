@@ -99,7 +99,7 @@ def merge(options):
         
         # tld case
         if len(full_domain_rev_split) == 1:
-            zone_dest = zone_in = fresh_dir
+            zone_dest = zone_raw = fresh_dir
          
         # sld case
         elif len(full_domain_rev_split) > 1:
