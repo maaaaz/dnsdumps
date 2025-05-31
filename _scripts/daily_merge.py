@@ -122,7 +122,8 @@ def merge(options):
                 fresh_file_full_path_today = os.path.join(zone_raw_fresh_dir_full_path, fresh_file)
                 ref_file_full_path_today = os.path.join(zone_tld_dest_ref_dir_full_path, fresh_file)
                 
-                cmd_cat_today = "cat '%s' >> '%s'" % (fresh_file_full_path_today, ref_file_full_path_today)
+                #cmd_cat_today = "cat '%s' >> '%s'" % (fresh_file_full_path_today, ref_file_full_path_today)
+                cmd_cat_today = "sort -u <(zcat '%s') <(zcat '%s') | sponge | gzip -9 > '%s'" % (fresh_file_full_path_today, ref_file_full_path_today, ref_file_full_path_today)
                 exec_append_today_fresh_to_ref_zone = exec_cmd(cmd_cat_today)
                 if exec_append_today_fresh_to_ref_zone.returncode != 0:
                     print('[!] something went wrong while appending "%s" to "%s"' % (fresh_file_full_path_today, ref_file_full_path_today))
