@@ -117,7 +117,6 @@ def merge(options):
             print("[!] this subfolder has been created in ref:\t\t'%s'" % (zone_tld_dest_ref_dir_full_path))
         
         for fresh_file in sorted(os.listdir(zone_raw_fresh_dir_full_path)):
-            print("fresh file: %s" % fresh_file)
             if fresh_file == 'today.gz':
                 fresh_file_full_path_today = os.path.join(zone_raw_fresh_dir_full_path, fresh_file)
                 ref_file_full_path_today = os.path.join(zone_tld_dest_ref_dir_full_path, fresh_file)
