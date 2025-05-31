@@ -77,14 +77,14 @@ def merge(options):
 
             # 1.1 move ref today to ref yesterday
             print('[+] moving today.gz file to yesterday.gz')
-            cmd_today = "cp -f '%s' '%s'" % (zone_tld_dest_ref_file_full_path_today, zone_tld_dest_ref_file_full_path_yesterday)
-            exec_cp_ref_today_to_ref_yesterday = exec_cmd(cmd_today)
-            if exec_cp_ref_today_to_ref_yesterday.returncode != 0:
+            cmd_today = "mv -f '%s' '%s'" % (zone_tld_dest_ref_file_full_path_today, zone_tld_dest_ref_file_full_path_yesterday)
+            exec_mv_ref_today_to_ref_yesterday = exec_cmd(cmd_today)
+            if exec_mv_ref_today_to_ref_yesterday.returncode != 0:
                 print('[!] something went wrong while moving "%s" to "%s"' % (zone_tld_dest_ref_file_full_path_today, zone_tld_dest_ref_file_full_path_yesterday))
             
             # 1.2. move ref today_new to ref yesterday_new
             print('[+] moving today_new.gz file to yesterday_new.gz')
-            cmd_today_new = "cp -f '%s' '%s'" % (zone_tld_dest_ref_file_full_path_today_new, zone_tld_dest_ref_file_full_path_yesterday_new)
+            cmd_today_new = "mv -f '%s' '%s'" % (zone_tld_dest_ref_file_full_path_today_new, zone_tld_dest_ref_file_full_path_yesterday_new)
             exec_mv_ref_today_new_to_ref_yesterday_new = exec_cmd(cmd_today_new)
             if exec_mv_ref_today_new_to_ref_yesterday_new.returncode != 0:
                 print('[!] something went wrong while moving "%s" to "%s"' % (zone_tld_dest_ref_file_full_path_today_new, zone_tld_dest_ref_file_full_path_yesterday_new))
