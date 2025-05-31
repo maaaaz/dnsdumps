@@ -28,7 +28,7 @@ jobs:
     - name: Install prerequisites
       run: |
         sudo apt -qq update
-        sudo apt -qq install fd-find
+        sudo apt -qq install fd-find moreutils
 
     - name: Prepare global variables
       run: | 
