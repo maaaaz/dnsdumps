@@ -127,7 +127,7 @@ def merge(options):
             zone_tld_dest_ref_file_full_path_yesterday = os.path.join(ref_zone_dir, 'yesterday.gz')
             
             print('[+] comparing fresh today.gz with ref yesterday files to find newly created domains')
-            cmd_diff = 'bash -c "comm -13 <(zcat \'%s\' | sort -u) <(zcat \'%s\' | sort -u) | tee | gzip > \'%s\'"' % (zone_tld_dest_ref_file_full_path_yesterday, zone_tld_dest_ref_file_full_path_today, zone_tld_dest_ref_file_full_path_today_new)
+            cmd_diff = 'bash -c "comm -13 <(zcat \'%s\' | sort -u) <(zcat \'%s\' | sort -u) | tee | gzip -c -9 | sponge \'%s\'"' % (zone_tld_dest_ref_file_full_path_yesterday, zone_tld_dest_ref_file_full_path_today, zone_tld_dest_ref_file_full_path_today_new)
             exec_diff = exec_cmd(cmd_diff)
             if exec_diff.returncode != 0:
                 print('[!] something went wrong while comparing "%s" with "%s"' % (zone_tld_dest_ref_file_full_path_yesterday, zone_tld_dest_ref_file_full_path_today))
