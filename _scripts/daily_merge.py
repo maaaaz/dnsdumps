@@ -4,17 +4,9 @@
 import sys
 import os
 import argparse
-import functools
-import concurrent.futures
-import datetime
-import shutil
 import subprocess
-import shlex
-
-import code
 import pprint
 
-from datetime import datetime, timezone
 from pathlib import Path
 
 # Script version
