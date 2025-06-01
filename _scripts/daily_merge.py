@@ -31,8 +31,6 @@ def print_result(res):
     print()
 
 def exec_cmd(cmd):
-    #cmd = 'ls /var/log | head -n+1'
-
     # yes, I know, 'shell=True' is very bad
     p = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding='utf-8')
     print("[+] command:\t%s" % p.args)
@@ -113,9 +111,8 @@ def merge(options):
                 fresh_file_full_path_today = os.path.join(zone_raw_fresh_dir_full_path, fresh_file)
                 ref_file_full_path_today = os.path.join(zone_tld_dest_ref_dir_full_path, fresh_file)
                 
-                cmd_cat_today = "cat '%s' >> '%s'" % (fresh_file_full_path_today, ref_file_full_path_today)
-                #cmd_cat_today = 'bash -c "sort -u <(zcat \'%s\') <(zcat \'%s\') | sponge | gzip > \'%s\'"' % (fresh_file_full_path_today, ref_file_full_path_today, ref_file_full_path_today)
-                #cmd_cat_today = "zcat '%s' '%s' | sort -u | sponge | gzip > '%s'" % (fresh_file_full_path_today, ref_file_full_path_today, ref_file_full_path_today)
+                #cmd_cat_today = "cat '%s' >> '%s'" % (fresh_file_full_path_today, ref_file_full_path_today)
+                cmd_cat_today = "zcat '%s' '%s' | sort -u | gzip -c -9 | sponge '%s'" % (fresh_file_full_path_today, ref_file_full_path_today, ref_file_full_path_today)
                 exec_append_today_fresh_to_ref_zone = exec_cmd(cmd_cat_today)
                 if exec_append_today_fresh_to_ref_zone.returncode != 0:
                     print('[!] something went wrong while appending "%s" to "%s"' % (fresh_file_full_path_today, ref_file_full_path_today))
