@@ -116,7 +116,9 @@ def merge(options):
                 exec_append_today_fresh_to_ref_zone = exec_cmd(cmd_cat_today)
                 if exec_append_today_fresh_to_ref_zone.returncode != 0:
                     print('[!] something went wrong while appending "%s" to "%s"' % (fresh_file_full_path_today, ref_file_full_path_today))
-            print_horizontal_bar()
+            print_horizontal_bar(width='small')
+        
+        print_horizontal_bar()
 
     # 3. generate diff files
     for ref_zone_dir, ref_zone_subdirs, ref_zone_files, in sorted(os.walk(referential)):
