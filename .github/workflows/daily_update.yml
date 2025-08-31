@@ -82,7 +82,6 @@ jobs:
       run: |
         cp "$DAILY_DIR/today_new.gz" /tmp/
         gunzip "/tmp/today_new.gz"
-        wc "/tmp/today_new"
-        rev "/tmp/today_new" | cut -d '.' -f 1 | rev | sort | uniq -c | tee /tmp/results.txt
-        curl --data-binary "@/tmp/results.txt" ${{ secrets.SECRET_NTFY_TOPIC }}
-        
+        wc -l "/tmp/today_new" | tee /tmp/results.txt
+        rev "/tmp/today_new" | cut -d '.' -f 1 | rev | sort | uniq -c | tee -a /tmp/results.txt
+        curl -s --data-binary "@/tmp/results.txt" ${{ secrets.SECRET_NTFY_TOPIC }} > /dev/null
