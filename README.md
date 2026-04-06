@@ -1,6 +1,8 @@
 dnsdumps
 ========
 
+**/!\ WARNING: files published here are currently not complete at all as I encounter issues with the NSEC zone walking. Consider this repository to be broken until further notice.**
+
 Description
 -----------
 Various DNS dumps: 
